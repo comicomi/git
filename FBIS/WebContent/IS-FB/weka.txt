@@ -1,0 +1,94 @@
+WEKA File se sastoji iz 3 dela: 
+
+1. deo u kom definišemo šta je ono što izučavamo (šta je opisano features-ima koji slede)
+	@relation weather 
+
+2. deo u kom definišemo atribute (features)
+
+	@attribute temperature real -> numeric
+	@attribute windy (TRUE, FALSE) -> boolean (posmatra se kao nominal)
+	@attribute outlook (sunny, rainy, cloudy) -> nominal
+	@attribute play (yes,no) -> nominal
+	
+3. deo u kom unosimo sakupljene podatke
+
+	@data
+	85, TRUE, sunny, yes
+	71, FALSE, rainy, no
+
+Kreiranje 4 atributa (prva dva su numerička, a druga dva nominalna) - we have two numeric features, one nominal feature (blue, gray, black) and a nominal class (positive, negative)
+
+// Declare two numeric attributes
+ Attribute Attribute1 = new Attribute(“firstNumeric”); -> kada je atribut numerički dovoljno je samo da ga inicijalizujemo
+ Attribute Attribute2 = new Attribute(“secondNumeric”);
+ 
+ // Declare a nominal attribute along with its values
+ FastVector fvNominalVal = new FastVector(3); -> kreiramo FastVector da bismo definisali moguće vrednosti nominalnog atributa
+ fvNominalVal.addElement(“blue”);
+ fvNominalVal.addElement(“gray”);
+ fvNominalVal.addElement(“black”);
+ Attribute Attribute3 = new Attribute(“aNominal”, fvNominalVal); -> kreiramo nominalni atribut
+ 
+ // Declare the class attribute along with its values
+ FastVector fvClassVal = new FastVector(2);
+ fvClassVal.addElement(“positive”);
+ fvClassVal.addElement(“negative”);
+ Attribute ClassAttribute = new Attribute(“theClass”, fvClassVal);
+ 
+ // Declare the feature vector
+ FastVector fvWekaAttributes = new FastVector(4);
+ fvWekaAttributes.addElement(Attribute1);    
+ fvWekaAttributes.addElement(Attribute2);    
+ fvWekaAttributes.addElement(Attribute3);    
+ fvWekaAttributes.addElement(ClassAttribute);
+ 
+ 
+Kreiranje dataset-a sa prikupljenim podacima - može da se čita od tačke 2. (tačka 1. kreira atribute vezane za ovaj primer)
+
+	FastVector      atts;
+    FastVector      attsRel;
+    FastVector      attVals;
+    FastVector      attValsRel;
+    Instances       data;
+    Instances       dataRel;
+    double[]        vals;
+    double[]        valsRel;
+    int             i;
+ 
+// 1. set up attributes
+    atts = new FastVector();
+  // - numeric
+    atts.addElement(new Attribute("att1"));
+  // - nominal
+    attVals = new FastVector();
+    for (i = 0; i < 5; i++)
+		attVals.addElement("val" + (i+1));
+    atts.addElement(new Attribute("att2", attVals));
+  // - string
+    atts.addElement(new Attribute("att3", (FastVector) null));
+  // - date
+    atts.addElement(new Attribute("att4", "yyyy-MM-dd"));
+ 
+// 2. create Instances object 
+    data = new Instances("MyRelation", atts, 0); -> Kreiramo Instances objekat, čiji @relation ima naziv MyRelation, atts predstavljaju sve @attributes
+ 
+// 3. fill with data -> popunjvamo Instace redom kako idu atributi
+  // first instance
+    vals = new double[data.numAttributes()];
+  // - numeric
+    vals[0] = Math.PI;
+  // - nominal
+    vals[1] = attVals.indexOf("val3");
+  // - string
+    vals[2] = data.attribute(2).addStringValue("This is a string!");
+  // - date
+    vals[3] = data.attribute(3).parseDate("2001-11-09");
+	
+Cuvanje u ARFF file
+
+ Instances dataSet = ...
+ ArffSaver saver = new ArffSaver();
+ saver.setInstances(dataSet);
+ saver.setFile(new File("./data/test.arff"));
+ saver.setDestination(new File("./data/test.arff"));   // **not** necessary in 3.5.4 and later
+ saver.writeBatch();

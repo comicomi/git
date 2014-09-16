@@ -1,0 +1,7 @@
+-broj prijatelja;
+-broj lajkova na dosadanjim profil slikama;
+-broj tagovanih osoba na novoj profil slici;
+-vreme objavljivanja nove profil slike;
+-da li je nova profil slika zaista nova, ili korisnik koristi neku od ranije upload-ovanih slika (jer u tom slucaju slika vec ima odredjeni broj lajkova);
+-pol;
+-godine.

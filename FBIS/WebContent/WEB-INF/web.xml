@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>FBIS</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>signin</display-name>
+    <servlet-name>signin</servlet-name>
+    <servlet-class>prva.SignIn</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>signin</servlet-name>
+    <url-pattern>/signin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>callback</display-name>
+    <servlet-name>callback</servlet-name>
+    <servlet-class>prva.Callback</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>callback</servlet-name>
+    <url-pattern>/callback</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>fbapi</display-name>
+    <servlet-name>fbapi</servlet-name>
+    <servlet-class>prva.FbApi</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fbapi</servlet-name>
+    <url-pattern>/fbapi</url-pattern>
+  </servlet-mapping>
+</web-app>

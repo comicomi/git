@@ -1,0 +1,54 @@
+yes-no podaci
+yes-> 1
+no-> -1
+
+liste interesovanja
+poredi se za svako interesovanje jedne liste da li je sadrzano u drugoj listi
+ -ako jeste broj zajednickih interesovanja se uvecava za 1;
+ -ako nije uzima se sledece interesovanje. 
+This definitely eliminates some potentially useful information. It’s possible that certain combinations of different interests work well
+together, such as skiing and snowboarding or drinking and dancing. Zbog toga mozemo napraviti hijerarhiju interesovanja, tako što ćemo
+ovim sličnim interesovanjima svrstati u istu kategoriju, pa ako nemamo potpuno poklapanje (skiing-skiing), već delimično (skiing-snowboarding)
+onda ćemo broj zajedničkih interesovanja uvećati za recimo 0.8, umesto za 1 (slučaj potpunog poklapanja). The farther up the hierarchy you
+have to go to find a match, the smaller fraction of a point it would be worth.
+
+lokacija
+uzeti longitude i latitude da bismo uporedili udaljenost dvoje ljudi. 
+lokacija na FB-u (kao atribut objekta usera data)
+"location": {
+    "id": "112151582135035", ---> klikom na ovaj id dobija se sledeći objekat : {
+	"name": "San Juan, Puerto Rico"													"id": "112151582135035",
+}																					"can_post": false,
+																					"category": "City",
+																					"category_list": [
+																						{
+																							"id": "224455390913969",
+																							"name": "City"
+																						}
+																					],
+																					"checkins": 1517907,
+																					"description": "San Juan, officially Municipio de la Ciudad Capital San Juan Bautista , is the capital and most populous municipality in the Commonwealth of Puerto Rico, an unincorporated territory of the United States. As of the 2010 census, it had a population of 395,326 making it the 46th-largest city under the jurisdiction of the United States. San Juan was founded by Spanish colonists in 1521, who called it Ciudad de Puerto Rico . Puerto Rico's capital is the second oldest European-established capital city in the Americas, after Santo Domingo, in the Dominican Republic. Several historical buildings are located in San Juan; among the most notable are the city's former defensive forts, Fort San Felipe del Morro and Fort San Cristóbal, and La Fortaleza, the oldest executive mansion in continuous use in the Americas.Today, San Juan is one of Puerto Rico's most important seaports, and is the island's manufacturing, financial, cultural, and tourism center. The population of the Metropolitan Statistical Area, including San Juan and the municipalities of Bayamón, Guaynabo, Cataño, Canóvanas, Caguas, Toa Alta, Toa Baja, Carolina and Trujillo Alto, is about 2 million inhabitants; thus, about half the population of Puerto Rico now lives and works in this area. San Juan is also a principal city of the San Juan-Caguas-Fajardo Combined Statistical Area. The city has been the host of numerous important events within the sports community, including the 1979 Pan American Games, 1966 Central American and Caribbean Games, events of the 2006, 2009 and 2013 World Baseball Classics, the Caribbean Series and the Special Olympics and MLB San Juan Series in 2010.",
+																					"has_added_app": false,
+																					"is_community_page": true,
+																					"is_published": true,
+																					"likes": 354853,
+																					"link": "https://www.facebook.com/pages/San-Juan-Puerto-Rico/112151582135035",
+																					"location": {
+																						"latitude": 18.45,
+																						"longitude": -66.0667
+																					},
+																					"name": "San Juan, Puerto Rico",
+																					"talking_about_count": 19455,
+																					"website": "www.sanjuancapital.com",
+																					"were_here_count": 1517907
+																			}
+Pitanje: Da li porediti po tome da li su iz istog grada, ili meriti udaljenost za dva različita grada (FB lokacija daje podatke samo o 
+gradu i državi, ne adresi(!) i poštanskom broju (kako je u primeru)?
+Udaljenost merimo slično kao Euklidsko rastojanje, s tim što the difference between the latitudes is first multiplied by 69.1, 
+and the difference between the longitudes is multiplied by 53.
+	latdif=69.1*(lat2-lat1)
+	longdif=53.0*(long2-long1)
+	return (latdif**2+longdif**2)**.5 //puta puta je stepen u Phyton-u :D
+	
+
+

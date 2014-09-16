@@ -1,0 +1,15 @@
+@relation profilePictureLikes
+
+@attribute friendsNumber numeric
+@attribute averageNumberOfLikes numeric
+@attribute tagsNumber numeric
+@attribute isNew {yes,no}
+@attribute gender {male,female}
+@attribute ageRange {teenagers,youngAdults,adults,seriousAdults}
+@attribute time {morning,midday,afternoon,night,lateNight}
+@attribute noticed {noticed,unnoticed}
+
+@data
+458,18.08,0,yes,female,youngAdults,morning,unnoticed
+213,35.4,0,no,female,youngAdults,afternoon,unnoticed
+309,22.44,0,no,female,youngAdults,midday,noticed

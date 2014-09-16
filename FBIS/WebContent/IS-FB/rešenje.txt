@@ -1,0 +1,13 @@
+Rešavanje problema:
+Pogledati kako se sa SVM korsti kernel tehinka (radial-basis function)!
+
+answers,inputs=[r.match for r in scaledset],[r.data for r in scaledset]
+param = svm_parameter(kernel_type = RBF)
+prob = svm_problem(answers,inputs)
+m=svm_model(prob,param)
+
+Primena rešanja na predikcije novih instanci:
+VAŽNO: Za svaku instancu, koju želimo da klasifikujemo dobijenim rešenjem, moramo izvršiti skaliranje vrednosti njenih atributa (jer je
+sa takvim vrednost rešenje naučeno da radi)!
+
+supervised learning ---> SVM, NB
