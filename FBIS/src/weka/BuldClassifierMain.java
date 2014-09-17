@@ -3,8 +3,6 @@ package weka;
 import java.io.IOException;
 import java.text.ParseException;
 
-import weka.classifiers.Classifier;
-
 public class BuldClassifierMain {
 
 	public static void main(String[] args) {

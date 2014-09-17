@@ -1,28 +1,15 @@
 package fb.signin;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.restfb.Connection;
-import com.restfb.FacebookClient;
-import com.restfb.types.Post.Likes;
 
-import domen.UserData;
-import facebook4j.Domain;
 import facebook4j.Facebook;
-import facebook4j.FacebookException;
 import facebook4j.FacebookFactory;
-import facebook4j.Like;
-import facebook4j.Photo;
-import facebook4j.Post;
-import facebook4j.ResponseList;
 
 /**
  * Servlet implementation class Prva
