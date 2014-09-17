@@ -8,7 +8,7 @@
     <description></description>
     <display-name>signin</display-name>
     <servlet-name>signin</servlet-name>
-    <servlet-class>prva.SignIn</servlet-class>
+    <servlet-class>fb.signin.SignIn</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>signin</servlet-name>
@@ -18,7 +18,7 @@
     <description></description>
     <display-name>callback</display-name>
     <servlet-name>callback</servlet-name>
-    <servlet-class>prva.Callback</servlet-class>
+    <servlet-class>fb.signin.Callback</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>callback</servlet-name>
@@ -28,7 +28,7 @@
     <description></description>
     <display-name>fbapi</display-name>
     <servlet-name>fbapi</servlet-name>
-    <servlet-class>prva.FbApi</servlet-class>
+    <servlet-class>fb.api.FbApi</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>fbapi</servlet-name>
