@@ -22,12 +22,19 @@ profile picture). This attribute has two possible values:
     * female
   6. ageRange - represents the age range of the currently logged in Facebook user based on the information about user's
 birthday. The following four possible values are defined for this attribute:
-    * teenagers
-    * youngAdults
-    * adults
-    * seriousAdults
-  7. time - represents the time when currently logged in Facebook user has updated the currently used profile picture 
-no matter if it is new (just uploaded) or not (reused)
-  8. noticed - represents weather the current profile picture of currently logged in Facebook user is noticed by his Facebook friends or not. This attribute has two possible values:
+    * teenagers - users under the age of 19
+    * youngAdults - users between the age of 19 and 25
+    * adults - users between the age of 25 and 34
+    * seriousAdults - users above the age of 34
+  7. time - represents part of the day time when currently logged in Facebook user has updated the currently used profile picture no matter if it is new (just uploaded) or not (reused). This information is defined based on the information about
+the time of updating current profile picture. Five possible values are defined for this attribute and those include the
+following:
+    * morning - user updated his profile picture between 5:00AM and 11:00AM
+    * midday - user updated his profile picutre between 11:00AM and 4:00PM
+    * afternoon - user updated his profile picture between 4:00PM and 9:00PM
+    * night - user updated his profile picture between 9:00PM and 2:00AM
+    * lateNight - user updated his profile picture between 2:00AM and 5:00AM
+  8. noticed - represents weather the current profile picture of currently logged in Facebook user is noticed by his Facebook friends or not. This attribute has been calculated using the information provided by the first and the second
+attribute considered and it has two possible values:
     * noticed
     * unnoticed
