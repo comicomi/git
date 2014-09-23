@@ -16,8 +16,8 @@ Facebook user
 has uploaded it just now) or it is reused (meaning the user decided to use one of his older profile pictures as a current
 profile picture). This attribute has two possible values:
   
-  *yes
-  *no
+  * yes
+  * no
 
   5. gender - represents the gender of currently logged in Facebook user. This attribute has two possible values:
   * male
