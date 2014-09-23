@@ -15,21 +15,19 @@ Facebook user
   4. isNew - represents weather a current profile picture of currently logged in Facebook user is new (meaning the user
 has uploaded it just now) or it is reused (meaning the user decided to use one of his older profile pictures as a current
 profile picture). This attribute has two possible values:
-  
-  * yes
-  * no
-
+    * yes
+    * no
   5. gender - represents the gender of currently logged in Facebook user. This attribute has two possible values:
-  * male
-  * female
+    * male
+    * female
   6. ageRange - represents the age range of the currently logged in Facebook user based on the information about user's
 birthday. The following four possible values are defined for this attribute:
-  *teenagers
-  *youngAdults
-  *adults
-  *seriousAdults
+    * teenagers
+    * youngAdults
+    * adults
+    * seriousAdults
   7. time - represents the time when currently logged in Facebook user has updated the currently used profile picture 
 no matter if it is new (just uploaded) or not (reused)
   8. noticed - represents weather the current profile picture of currently logged in Facebook user is noticed by his Facebook friends or not. This attribute has two possible values:
-  *noticed
-  *unnoticed
+    * noticed
+    * unnoticed
