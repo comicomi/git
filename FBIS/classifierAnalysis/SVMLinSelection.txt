@@ -1,0 +1,51 @@
+-S
+0
+-K
+0
+-D
+3
+-G
+0.0
+-R
+0.0
+-N
+0.5
+-M
+40.0
+-C
+10.0
+-E
+0.001
+-P
+0.1
+-Z
+-B
+-seed
+1
+
+Correctly Classified Instances          90               70.3125 %
+Incorrectly Classified Instances        38               29.6875 %
+Kappa statistic                          0.0276
+Mean absolute error                      0.389 
+Root mean squared error                  0.4482
+Relative absolute error                 97.4065 %
+Root relative squared error            100.4721 %
+Total Number of Instances              128     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.086     0.065      0.333     0.086     0.136      0.6      noticed
+                 0.935     0.914      0.731     0.935     0.821      0.6      unnoticed
+Weighted Avg.    0.703     0.682      0.622     0.703     0.634      0.6  
+
+=== Confusion Matrix ===
+
+  a  b   <-- classified as
+  3 32 |  a = noticed
+  6 87 |  b = unnoticed
+
+Ponderisana F-mera: 0.6336165308747856
+Preciznost: 0.6223301820728291
+Odziv: 0.703125
+Tacnost: 70.3125

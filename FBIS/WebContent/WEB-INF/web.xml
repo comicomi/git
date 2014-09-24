@@ -34,4 +34,15 @@
     <servlet-name>fbapi</servlet-name>
     <url-pattern>/fbapi</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FbPrediction</display-name>
+    <servlet-name>FbPrediction</servlet-name>
+    <servlet-class>fb.predict.FbPrediction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FbPrediction</servlet-name>
+    <url-pattern>/FbPrediction</url-pattern>
+    <url-pattern>/fbpredict</url-pattern>
+  </servlet-mapping>
 </web-app>

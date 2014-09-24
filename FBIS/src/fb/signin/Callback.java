@@ -6,7 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Path;
 
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
@@ -14,7 +13,6 @@ import facebook4j.FacebookException;
 /**
  * Servlet implementation class Callback
  */
-@Path("callback")
 public class Callback extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +36,8 @@ public class Callback extends HttpServlet {
         } catch (FacebookException e) {
             throw new ServletException(e);
         }
-        response.sendRedirect(request.getContextPath() + "/fbapi");		
+       // response.sendRedirect(request.getContextPath() + "/fbapi");	
+        response.sendRedirect(request.getContextPath() + "/fbpredict");	
 	}
 
 	/**

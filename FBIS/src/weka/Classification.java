@@ -10,38 +10,53 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Random;
 
-
-
-import domen.UserData;
+import weka.attributeSelection.BestFirst;
+import weka.attributeSelection.ClassifierSubsetEval;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.functions.LibSVM;
+import weka.classifiers.meta.CVParameterSelection;
+import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Attribute;
 import weka.core.FastVector;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.converters.ArffSaver;
+import weka.core.Utils;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.filters.Filter;
+import weka.filters.MultiFilter;
+import weka.filters.supervised.attribute.AttributeSelection;
+import weka.filters.unsupervised.attribute.Discretize;
+import domen.UserData;
 
 public class Classification {
 
-	private String arffFilePath = System.getProperty("user.dir")+"\\data\\trainingDatasetFB.arff";
+	private String arffFilePath = "trainingDatasetFB.arff";
+	private String classifierFilePath = "classifier.model";
+	private String dataFolderPath = "data";
 	private Instances dataset;
-	private Classifier classifier;
+	private Classifier finalClassifier;
 
-	public Classification() {
+	public Classification(String arffFile) {
 		// TODO Auto-generated constructor stub
 		try {
-			File trainingFile=new File(arffFilePath);
-			if(!trainingFile.exists()){
-				createIntances();
+			if(arffFile==null) {
+				createIntances(false);
+				return;
 			}
-			else{
-			    loadDataset();	
+			arffFilePath = arffFile;
+			File dataFolder = new File(dataFolderPath);
+			if (!dataFolder.exists())
+				dataFolder.mkdir();
+			File trainingFile = new File(dataFolderPath + "\\" + arffFilePath);
+			if (!trainingFile.exists()) {
+				createIntances(true);
+			} else {
+				loadDataset();
 			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -54,18 +69,18 @@ public class Classification {
 			e.printStackTrace();
 		}
 	}
-		
 
 	private void loadDataset() throws Exception {
-		InputStream stream = new FileInputStream(arffFilePath);
+		InputStream stream = new FileInputStream(dataFolderPath + "\\"
+				+ arffFilePath);
 		DataSource loader = new DataSource(stream);
 		dataset = loader.getDataSet();
-		 if (dataset.classIndex() == -1)
-		   dataset.setClassIndex(7);
-	
+		if (dataset.classIndex() == -1)
+			dataset.setClassIndex(dataset.numAttributes() - 1);
+
 	}
 
-	public void createIntances() throws ParseException, IOException {
+	public void createIntances(boolean train) throws ParseException, IOException {
 
 		Attribute friendsNumber = new Attribute("friendsNumber");
 		Attribute averageNumberOfLikes = new Attribute("averageNumberOfLikes");
@@ -88,7 +103,7 @@ public class Classification {
 		ageRangeValues.addElement("seriousAdults");
 		Attribute ageRange = new Attribute("ageRange", ageRangeValues);
 
-		FastVector timeValues= new FastVector(5);
+		FastVector timeValues = new FastVector(5);
 		timeValues.addElement("morning");
 		timeValues.addElement("midday");
 		timeValues.addElement("afternoon");
@@ -100,7 +115,6 @@ public class Classification {
 		noticedValues.addElement("noticed");
 		noticedValues.addElement("unnoticed");
 		Attribute classes = new Attribute("noticed", noticedValues);
-		
 
 		FastVector attributes = new FastVector();
 		attributes.addElement(friendsNumber);
@@ -114,11 +128,11 @@ public class Classification {
 
 		dataset = new Instances("profilePictureLikes", attributes, 0);
 		dataset.setClassIndex(7);
-		writeToTrainingArffFile(dataset);
+		if(train) writeToArffFile(dataset);
 	}
 
-	public void addInstance(UserData userdata) throws IOException,
-			ParseException {
+	public void addInstance(UserData userdata, boolean train)
+			throws IOException, ParseException {
 		Instance instance = new Instance(8);
 		instance.setDataset(dataset);
 		instance.setValue(dataset.attribute(0), userdata.getFriendsNumber());
@@ -130,73 +144,130 @@ public class Classification {
 		instance.setValue(dataset.attribute(5), userdata.getAgeRange());
 		System.out.println(userdata.getDateTimeCreated());
 		instance.setValue(dataset.attribute(6), userdata.getTime());
-		instance.setValue(dataset.attribute(7), userdata.getClassValue());
-		if(dataset.checkInstance(instance)) dataset.add(instance);
-		writeToTrainingArffFile(dataset);
+		if (train)
+			instance.setValue(dataset.attribute(7), userdata.getClassValue());
+		if (dataset.checkInstance(instance))
+			dataset.add(instance);
+		if(train) writeToArffFile(dataset);
 	}
 
-	private void writeToTrainingArffFile(Instances instances)
+	private void writeToArffFile(Instances instances)
 			throws IOException {
+		File dataFolder = new File("data");
+		if (!dataFolder.exists())
+			dataFolder.mkdir();
 		Instances dataSet = instances;
-		BufferedWriter writer = new BufferedWriter(new FileWriter(arffFilePath));
+		BufferedWriter writer = new BufferedWriter(new FileWriter(
+				dataFolderPath + "\\" + arffFilePath));
+
 		writer.write(dataSet.toString());
 		writer.flush();
 		writer.close();
 	}
-	
-	public void saveArffFile() throws IOException{
-		ArffSaver saver = new ArffSaver(); 
-		saver.setInstances(dataset); 
-		saver.setFile(new File(arffFilePath)); 
-		saver.writeBatch(); 
-	}
 
-	public void buildNBClassifier() throws Exception{
-		classifier = new NaiveBayes();		
-		classifier.buildClassifier(dataset);
-	}
-	
-	public void buildSVMClassifier() throws Exception{
-		classifier = new LibSVM();		
-		classifier.buildClassifier(dataset);
-	}
-	
-	
-	public void saveClassifier(String classifierFileName) throws IOException{
-		OutputStream os = new FileOutputStream(classifierFileName); 
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(os); 
-		objectOutputStream.writeObject(classifier);
+	public void saveClassifier(String classifierFileName) throws IOException {
+		File dataFolder = new File(dataFolderPath);
+		if (!dataFolder.exists())
+			dataFolder.mkdir();
+		File file = new File(classifierFileName);
+		if (!file.exists())
+			file.createNewFile();
+		System.out.println(dataFolder.getAbsolutePath());
+		OutputStream os = new FileOutputStream(dataFolderPath + "\\"
+				+ classifierFileName);
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(os);
+		objectOutputStream.writeObject(finalClassifier);
 		objectOutputStream.close();
 	}
-	
-	public void loadClassifier(String classifierFileName) throws ClassNotFoundException, IOException{
-		InputStream is = new FileInputStream(classifierFileName); 
+
+	public void loadClassifier(String classifierFileName)
+			throws ClassNotFoundException, IOException {
+		InputStream is = new FileInputStream(dataFolderPath + "\\"
+				+ classifierFileName);
 		ObjectInputStream objectInputStream = new ObjectInputStream(is);
-		classifier = (Classifier) objectInputStream.readObject();
-		objectInputStream.close(); 
+		finalClassifier = (Classifier) objectInputStream.readObject();
+		objectInputStream.close();
 		is.close();
 	}
-	
-	public void evaluateClassifier() throws Exception{
-		dataset = dataset.resample(new Random(42));
-		double percent = 70.0; 
-		int trainSize = (int) Math.round(dataset.numInstances() * percent / 100); 
-		int testSize = dataset.numInstances() - trainSize;
-		Instances train = new Instances(dataset, 0, trainSize); 
-		Instances test = new Instances(dataset, trainSize, testSize);
-		train.setClassIndex(7); test.setClassIndex(7);  
-		Evaluation eval = new Evaluation(train); 
-		eval.evaluateModel(classifier, test); 
-		System.out.println(eval.toSummaryString());
-		System.out.println(eval.weightedFMeasure()); 
-		System.out.println(eval.weightedPrecision()); 
-		System.out.println(eval.weightedRecall());		
+
+	public void evaluateClassifier(Classifier classifier, PrintWriter out)
+			throws Exception {
+		Evaluation eval = new Evaluation(dataset);
+		eval.crossValidateModel(classifier, dataset, 10, new Random(1));
+		out.println(eval.toSummaryString());
+		out.println(eval.toClassDetailsString());
+		out.println(eval.toMatrixString());
+		out.println("Weighted F-measure: " + eval.weightedFMeasure());
+		out.println("Precision: " + eval.weightedPrecision());
+		out.println("Recall: " + eval.weightedRecall());
+		out.println("Accuracy: " + eval.pctCorrect());
 	}
-	
-	public void classify() throws Exception{		
-		System.out.println(classifier.classifyInstance(dataset.firstInstance())); 
-		System.out.println(dataset.attribute(dataset.classIndex()).value((int)dataset.firstInstance().classValue()));
-		System.out.println(classifier.distributionForInstance(dataset.firstInstance())); 
+
+	public double classify() throws Exception {
+		loadClassifier(classifierFilePath);
+		double predicted = finalClassifier.classifyInstance(dataset
+				.firstInstance());
+		System.out.println(predicted);
+		System.out.println(dataset.attribute(dataset.classIndex()).value(
+				(int) predicted));
+		return finalClassifier.classifyInstance(dataset.firstInstance());
 	}
-	
+
+	public Discretize buildDiscretizeFilter() throws Exception {
+		Discretize discretizeFilter = new Discretize();
+		discretizeFilter.setAttributeIndices("first-last");
+		discretizeFilter.setInputFormat(dataset);
+		discretizeFilter.setBins(10);
+		discretizeFilter.setUseEqualFrequency(true);
+		return discretizeFilter;
+	}
+
+	public void buildClassifierWithFiltersApplied(Filter filter,
+			Classifier classifier) throws Exception {
+		FilteredClassifier filteredClassifier = new FilteredClassifier();
+		filteredClassifier.setClassifier(classifier);
+		filteredClassifier.setFilter(filter);
+		filteredClassifier.buildClassifier(dataset);
+		finalClassifier = filteredClassifier;
+	}
+
+	public AttributeSelection buildAttributSelectionFilter(Classifier classifier)
+			throws Exception {
+		AttributeSelection asFilter = new AttributeSelection();
+		ClassifierSubsetEval evaluator = new ClassifierSubsetEval();
+		evaluator.setClassifier(classifier);
+		asFilter.setEvaluator(evaluator);
+		asFilter.setSearch(new BestFirst());
+		return asFilter;
+	}
+
+	public void buildClassifierWithFilteredAttributes(Classifier classifier)
+			throws Exception {
+		Filter[] filters = new Filter[2];
+		filters[0] = buildDiscretizeFilter();
+		filters[1] = buildAttributSelectionFilter(classifier);
+		MultiFilter multiFilter = new MultiFilter();
+		multiFilter.setFilters(filters);
+		buildClassifierWithFiltersApplied(multiFilter, classifier);
+	}
+
+	public Classifier getClassifier() {
+		return finalClassifier;
+	}
+
+	public void setClassifier(Classifier classifier) {
+		this.finalClassifier = classifier;
+	}
+
+	//proba
+	public void optimize() throws Exception {
+		CVParameterSelection ps = new CVParameterSelection();
+		ps.setClassifier(new LibSVM());
+		ps.setNumFolds(5); // using 5-fold CV
+		ps.addCVParameter("C 0.1 0.5 5");
+
+		// build and output best options
+		ps.buildClassifier(dataset);
+		System.out.println(Utils.joinOptions(ps.getBestClassifierOptions()));
+	}
 }
