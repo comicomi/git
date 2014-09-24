@@ -9,8 +9,12 @@ The objective of this project was to build a prediction model that is able to pr
   6. Application of the selected classifier to the given instance containing prediction relevant user data about the currently logged in user.
 
 Two Facebook applications were made during the realisation of this project:
-  * Facebook application for collecting the data needed for creation  of the training dataset (in the first phase)
+  * Facebook application for collecting the data needed to create of the training dataset (in the first phase)
   * Facebook application that provides currently logged in user to check weather his currently updated profile picture will be noticed by his friends (in the sixth phase)
+
+Two classifiers were considered during the realisation of the forth phase of the project:
+  * Naive Bayes classifier
+  * SVM classifier
 
 2. Dataset
 ==========
@@ -78,8 +82,8 @@ The following table provides the example of an instance given to the final class
 
 This application was written in programming language Java, in Eclipse IDE. The following libraries were used for the
 implementation:
-  * [facebook4j.jar](http://facebook4j.org)
-  * [weka.jar](http://www.cs.waikato.ac.nz/ml/weka)
+  * [facebook4j.jar](http://facebook4j.org) - Java library for the Facebook Graph API used for obtaining the data needed to create training dataset
+  * [weka.jar](http://www.cs.waikato.ac.nz/ml/weka) - Java library with a collection of machine learning algorithms included in Weka used to create a predictive classification model
 
 6. Acknowledgements 
 ===================
