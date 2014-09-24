@@ -64,3 +64,6 @@ The following table provides the example of an instance given to the final class
 | friendsNumber | averageNumberOfLikes | tagsNumber | isNew | gender | ageRange   | time  |
 |---------------|----------------------|------------|-------|--------|------------|-------|
 | 235           | 35.7                 | 0          | yes   | female | youngAdult | night |
+
+5. Acknowledgements 
+This application has been developed as a part of the project assignment for the course [link](http://is.fon.rs) <<Intelligent Systems>> at the [link](http://fon.rs) <<Faculty of Organization Sciences>>, University of Belgrade, Serbia.
