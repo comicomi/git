@@ -73,6 +73,8 @@ The following table provides the example of an instance in training set:
 4. The Facebook application performing the prediction
 =====================================================
 
+![Facebook application](/FBIS/images/image1.png)
+
 
 The following table provides the example of an instance given to the final classifier for the classification:
 
