@@ -43,6 +43,9 @@ Looking at the considered attributes, one can notice that the first three attrib
 are nominal. Also, it is important to emphasize that the last attribute represent the class attribute in a dataset meaning that based of the infromation obtained by the rest of considered attributes, model should be able to predict the
 value of the last attribute.
 
+3. The Facebook application for creating the dataset for training
+==================================================================
+
 Training dataset
 ----------------
 
@@ -52,8 +55,9 @@ The following table provides the example of an instance in training set:
 |---------------|----------------------|------------|-------|--------|------------|-------|---------|
 | 235           | 35.7                 | 0          | yes   | female | youngAdult | night | noticed |
 
-3. The Facebook application
-===========================
+4. The Facebook application performing the prediction
+=====================================================
+
 
 The following table provides the example of an instance given to the final classifier for the classification:
 
