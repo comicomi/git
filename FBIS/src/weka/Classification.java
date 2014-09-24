@@ -169,10 +169,8 @@ public class Classification {
 		File dataFolder = new File(dataFolderPath);
 		if (!dataFolder.exists())
 			dataFolder.mkdir();
-		File file = new File(classifierFileName);
-		if (!file.exists())
-			file.createNewFile();
-		System.out.println(dataFolder.getAbsolutePath());
+		File file = new File(dataFolderPath+"\\"+classifierFileName);
+		file.createNewFile();
 		OutputStream os = new FileOutputStream(dataFolderPath + "\\"
 				+ classifierFileName);
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(os);

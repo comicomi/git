@@ -24,72 +24,7 @@ Weighted Avg.    0.727     0.602      0.685     0.727     0.682      0.633
   7 28 |  a = noticed
   7 86 |  b = unnoticed
 
-Ponderisana F-mera: 0.681838768115942
-Preciznost: 0.684827302631579
-Odziv: 0.7265625
-Tacnost: 72.65625
--F
-weka.filters.unsupervised.attribute.Discretize -F -B 10 -M -1.0 -R first-last
--W
-weka.classifiers.bayes.NaiveBayes
---
-
-
-
-
-Correctly Classified Instances          93               72.6563 %
-Incorrectly Classified Instances        35               27.3438 %
-Kappa statistic                          0.1534
-Mean absolute error                      0.3656
-Root mean squared error                  0.4422
-Relative absolute error                 91.5381 %
-Root relative squared error             99.1279 %
-Total Number of Instances              128     
-
-=== Detailed Accuracy By Class ===
-
-               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
-                 0.2       0.075      0.5       0.2       0.286      0.633    noticed
-                 0.925     0.8        0.754     0.925     0.831      0.633    unnoticed
-Weighted Avg.    0.727     0.602      0.685     0.727     0.682      0.633
-
-=== Confusion Matrix ===
-
-  a  b   <-- classified as
-  7 28 |  a = noticed
-  7 86 |  b = unnoticed
-
-Ponderisana F-mera: 0.681838768115942
-Preciznost: 0.684827302631579
-Odziv: 0.7265625
-Tacnost: 72.65625
-
-
-
-
-Correctly Classified Instances          93               72.6563 %
-Incorrectly Classified Instances        35               27.3438 %
-Kappa statistic                          0.1534
-Mean absolute error                      0.3656
-Root mean squared error                  0.4422
-Relative absolute error                 91.5381 %
-Root relative squared error             99.1279 %
-Total Number of Instances              128     
-
-=== Detailed Accuracy By Class ===
-
-               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
-                 0.2       0.075      0.5       0.2       0.286      0.633    noticed
-                 0.925     0.8        0.754     0.925     0.831      0.633    unnoticed
-Weighted Avg.    0.727     0.602      0.685     0.727     0.682      0.633
-
-=== Confusion Matrix ===
-
-  a  b   <-- classified as
-  7 28 |  a = noticed
-  7 86 |  b = unnoticed
-
-Ponderisana F-mera: 0.681838768115942
-Preciznost: 0.684827302631579
-Odziv: 0.7265625
-Tacnost: 72.65625
+Weighted F-measure: 0.681838768115942
+Precision: 0.684827302631579
+Recall: 0.7265625
+Accuracy: 72.65625

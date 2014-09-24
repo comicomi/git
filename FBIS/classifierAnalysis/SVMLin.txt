@@ -45,7 +45,7 @@ Weighted Avg.    0.719     0.676      0.652     0.719     0.643      0.66
   3 32 |  a = noticed
   4 89 |  b = unnoticed
 
-Ponderisana F-mera: 0.6433995327102804
-Preciznost: 0.6516012396694215
-Odziv: 0.71875
-Tacnost: 71.875
+Weighted F-measure: 0.6433995327102804
+Precision: 0.6516012396694215
+Recall: 0.71875
+Accuracy: 71.875

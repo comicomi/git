@@ -1,11 +1,13 @@
 package weka.run;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import weka.Classification;
 import weka.classifier.NBClassifier;
+import weka.classifier.SVMClassifier;
 import weka.classifiers.Classifier;
 
 public class ClassifierTryOut {
@@ -20,7 +22,7 @@ public class ClassifierTryOut {
 			
 			tryOut.tryOutClassifier(cl.getClassifier(),"NB.txt");
 			tryOut.tryOutClassifier(NBClassifier.createNBClassifier(),"NB.txt");
-	/*		
+			
 				
 			//NB			
 			tryOut.tryOutClassifier(NBClassifier.createNBClassifier(),"NB.txt");
@@ -48,7 +50,7 @@ public class ClassifierTryOut {
 			tryOut.tryOutClassifierWithAttributeSelection(SVMClassifier.configureSVMClassifierPoly(15,0.5,5,3),"SVMPolyConfSelection.txt");
 			tryOut.tryOutClassifierWithAttributeSelection(SVMClassifier.configureSVMClassifierRBF(15,0.5),"SVMRBFConfSelection.txt");
 			
-		*/				
+					
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -56,7 +58,7 @@ public class ClassifierTryOut {
 	}
 
 	private void tryOutClassifier(Classifier classifier, String fileName) throws Exception {
-		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("classifierAnalysis\\"+fileName, true)));
+		PrintWriter out = new PrintWriter(new FileWriter("classifierAnalysis\\"+fileName));
 		for (String option : classifier.getOptions()) {
 			out.println(option);
 		}		
@@ -67,7 +69,7 @@ public class ClassifierTryOut {
 	}
 
 	private void tryOutClassifierWithAttributeSelection(Classifier classifier, String fileName) throws Exception {
-		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("classifierAnalysis\\"+fileName, true)));
+		PrintWriter out = new PrintWriter(new FileWriter("classifierAnalysis\\"+fileName));
 		for (String option : classifier.getOptions()) {
 			out.println(option);
 		}		
