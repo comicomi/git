@@ -1,8 +1,15 @@
 1. About the project
 ====================
 
-The objective of this project was to develop Facebook application that could predict weather the profile picture of a user 
-will be noticed by his friends or not. 
+The objective of this project was to build a prediction model that is able to predict weather the currently updated profile picture of currently logged in Facebook user will be noticed by his friends or not. The project workflow consisted of the following phases:
+  1. Collecting the data relevant for the project using Facebook Graph API; 
+  3. Preprocessing the collected data and creation of the training dataset;
+  4. Choosing classifiers for building the prediction model and analysing the change of their performance with the change of the model parameters;
+  5. Selecting the classifier with the best performance (determined by the value of F-measure and accuracy for the given classifier and model parameters);
+  6. Application of the selected classifier to the given instance containing prediction relevant user data about the currently logged in user.
+Two Facebook applications were made during the realisation of this project:
+  * Facebook application for collecting the data needed for creation  of the training dataset (in phase 1.)
+  * Facebook application that provides currently logged in user to check weather his currently updated profile picture will be noticed by his friends (in phase 6.)
 
 2. Dataset
 ==========
