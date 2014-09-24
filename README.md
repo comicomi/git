@@ -49,7 +49,7 @@ following:
     * lateNight - user updated his profile picture between 2:00AM and 5:00AM
   8. noticed - represents weather the current profile picture of currently logged in Facebook user is noticed by his Facebook friends or not. This attribute has been defined and calculated based on the information provided by the first and the second
 attribute considered using the following formula:
-
+![Noticed formula](/FBIS/images/formula.gif)
 
 Looking at the considered attributes, one can notice that the first three attributes are numeric, while the rest of them
 are nominal. Also, it is important to emphasize that the last attribute represent the class attribute in a dataset meaning that based of the infromation obtained by the rest of considered attributes, model should be able to predict the
