@@ -65,5 +65,14 @@ The following table provides the example of an instance given to the final class
 |---------------|----------------------|------------|-------|--------|------------|-------|
 | 235           | 35.7                 | 0          | yes   | female | youngAdult | night |
 
-5. Acknowledgements 
+5. Technical realisation
+========================
+
+This application was written in programming language Java, in Eclipse IDE. The following libraries were used for the
+implementation:
+  * [facebook4j.jar](http://facebook4j.org)
+  * [weka.jar](http://www.cs.waikato.ac.nz/ml/weka)
+
+6. Acknowledgements 
+===================
 This application has been developed as a part of the project assignment for the course [Intelligent Systems](http://is.fon.rs) at the [Faculty of Organization Sciences](http://fon.rs), University of Belgrade, Serbia.
