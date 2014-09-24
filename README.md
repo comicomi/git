@@ -58,6 +58,9 @@ value of the last attribute.
 3. The Facebook application for creating the dataset for training
 ==================================================================
 
+![Facebook application](/images/image.png)
+
+
 Training dataset
 ----------------
 
