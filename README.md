@@ -6,11 +6,12 @@ will be noticed by his friends or not.
 
 2. Dataset
 ==========
+
 The attributes considered for each user using this application include the following:
 
   1. friendsNumber - represents the number of friends of currently logged in Facebook user
   2. averageNumberOfLikes - the average number of likes on profile pictures of currently logged in Facebook user
-  3. tagsNumberNumber - represents the number of tagged Facebook users on current profile picture of currently logged in 
+  3. tagsNumberNumber - represents the number of tagged Facebook users on current profile picture of currently logged in
 Facebook user
   4. isNew - represents weather a current profile picture of currently logged in Facebook user is new (meaning the user
 has uploaded it just now) or it is reused (meaning the user decided to use one of his older profile pictures as a current
@@ -38,3 +39,24 @@ following:
 attribute considered and it has two possible values:
     * noticed
     * unnoticed
+Looking at the considered attributes, one can notice that the first three attributes are numeric, while the rest of them
+are nominal. Also, it is important to emphasize that the last attribute represent the class attribute in a dataset meaning that based of the infromation obtained by the rest of considered attributes, model should be able to predict the
+value of the last attribute.
+
+Training dataset
+----------------
+
+The following table provides the example of an instance in training set:
+
+| friendsNumber | averageNumberOfLikes | tagsNumber | isNew | gender | ageRange   | time  | noticed |
+|---------------|----------------------|------------|-------|--------|------------|-------|---------|
+| 235           | 35.7                 | 0          | yes   | female | youngAdult | night | noticed |
+
+3. The Facebook application
+===========================
+
+The following table provides the example of an instance given to the final classifier for the classification:
+
+| friendsNumber | averageNumberOfLikes | tagsNumber | isNew | gender | ageRange   | time  |
+|---------------|----------------------|------------|-------|--------|------------|-------|
+| 235           | 35.7                 | 0          | yes   | female | youngAdult | night |
